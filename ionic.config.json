@@ -1,0 +1,7 @@
+{
+  "name": "mangadez-client",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "custom"
+}
