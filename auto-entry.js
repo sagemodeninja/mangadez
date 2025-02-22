@@ -9,7 +9,7 @@ function lookupFiles(dir, target, exlude) {
         if ((ext = path.extname(file)) === target && (!exlude || !exlude.includes(file))) {
             files.push({
                 entry: path.basename(file, ext),
-                template: './' + path.join(dir, file),
+                template: path.join(dir, file),
             })
         }
     })
@@ -18,8 +18,9 @@ function lookupFiles(dir, target, exlude) {
 }
 
 function loadEntries(options) {
-    const dir = options?.dir ?? './scripts/views'
+    const dir = path.join(__dirname, 'src/scripts/views')
     const files = lookupFiles(dir, '.ts', options?.exclude)
+
     return files
             .reduce((entries, file) => {
                 return {
@@ -30,13 +31,14 @@ function loadEntries(options) {
 }
 
 function loadViews(options) {
-    const dir = options?.dir ?? './scripts/views'
+    const dir = path.join(__dirname, 'src/scripts/views')
     const files = lookupFiles(dir, '.html', options?.exclude)
+
     return files
             .map(({template, entry}) => {
                 return new HtmlWebpackPlugin({
                     template,
-                    filename: `views/${entry}.html`,
+                    filename: `${entry}.html`,
                     chunks: [entry]
                 })
             })

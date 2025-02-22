@@ -3,7 +3,7 @@
         "*.html": "${basename}.ts,${basename}.scss"
     },
     "files.exclude": {
-        "**/build": true,
+        "**/build": false,
         "**/node_modules": true
     }
 }
